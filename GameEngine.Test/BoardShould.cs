@@ -9,7 +9,7 @@ namespace GameEngine.Test {
 
 //-----------------------------------------------------------------------------
 
-public class BoxShould {
+public class BoardShould {
 
 //-----------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ public class BoxShould {
 
 //-----------------------------------------------------------------------------
 
-private readonly Box sut = new Box();
+private readonly Board sut = new Board();
 
 //-----------------------------------------------------------------------------
 
@@ -27,35 +27,33 @@ private readonly Box sut = new Box();
 //-----------------------------------------------------------------------------
 
 [Fact]
-public void HaveDefaultMarkingToNone()
+public void HaveNineBoxes()
 {
-  Assert.Equal(Marking.None, sut.Marking);
+  int boxCount = 0;
+  foreach (var b in sut.Boxes) boxCount++;
+  
+  Assert.Equal(9, boxCount);
 }
 
 //-----------------------------------------------------------------------------
 
 [Fact]
-public void RaisePropertyChanged()
+public void SetMarkingAtSpecifiedPosition()
 {
-  Assert.PropertyChanged(
-    sut,
-    nameof(sut.Marking),
-    () => sut.Marking = Marking.Circle);
+  sut.SetMarking(3, Marking.Cross);
+
+  Assert.Equal(Marking.Cross, sut.GetMarking(3));
 }
 
-//-----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 [Fact]
-public void NotRaisePropertyChangeWhenSameValueIsSet()
+public void RaiseOnMarkEvent()
 {
-  int eventRaiseCount = 0;
-  sut.PropertyChanged += (s, e) => ++eventRaiseCount;
-
-  sut.Marking = Marking.Circle;
-  Assert.Equal(1, eventRaiseCount);
-
-  sut.Marking = Marking.Circle;
-  Assert.Equal(1, eventRaiseCount);
+  Assert.Raises<MarkEventArgs>( 
+    handler => sut.MarkEvent += handler,
+    handler => sut.MarkEvent -= handler,
+    () => sut.SetMarking(3, Marking.Circle));
 }
 
 // ----------------------------------------------------------------------------
