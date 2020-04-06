@@ -1,5 +1,6 @@
 ﻿//-----------------------------------------------------------------------------
 
+using GameEngine.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,10 +20,7 @@ public class Board {
 
 //-----------------------------------------------------------------------------
 
-public IEnumerable<Box> Boxes
-{
-  get => boxes;
-}
+public IEnumerable<Box> Boxes => boxes;
 
 //-----------------------------------------------------------------------------
 
@@ -53,7 +51,8 @@ public Marking GetMarking(
 
 //-----------------------------------------------------------------------------
 
-public event EventHandler<MarkEventArgs> MarkEvent;
+public event EventHandler<BoxMarkingEventArgs> BoxMarkEvent;
+public event EventHandler<BoxMarkingEventArgs> BoxOccupiedEvent;
 
 //-----------------------------------------------------------------------------
 
@@ -65,12 +64,7 @@ public event EventHandler<MarkEventArgs> MarkEvent;
 public Board()
 {
   boxes = new Box[9];
-  for (int i = 0; i < boxes.Length; i++)
-  {
-    var b = new Box();
-    b.PropertyChanged += (s, e) => OnMark(new MarkEventArgs(i, b.Marking));
-    boxes[i] = b;
-  }
+  Populate(boxes);
 }
 
 //-----------------------------------------------------------------------------
@@ -81,9 +75,33 @@ public Board()
 //-----------------------------------------------------------------------------
 
 private void OnMark(
-  MarkEventArgs args)
+  int position,
+  Marking marking)
 {
-  MarkEvent?.Invoke(this, args);
+  BoxMarkEvent?.Invoke(this, new BoxMarkingEventArgs(position, marking));
+}
+
+//-----------------------------------------------------------------------------
+
+private void OnAlreadyMarked(
+  int position,
+  Marking marking)
+{
+  BoxOccupiedEvent?.Invoke(this, new BoxMarkingEventArgs(position, marking));
+}
+
+//-----------------------------------------------------------------------------
+
+private void Populate(
+  Box[] boxes)
+{
+  for (int i = 0; i < boxes.Length; i++)
+  {
+    var b = new Box();
+    b.MarkingEvent += (s, e) => OnMark(i, b.Marking);
+    b.MarkingOccupiedEvent += (s, e) => OnAlreadyMarked(i, b.Marking);
+    boxes[i] = b;
+  }
 }
 
 //-----------------------------------------------------------------------------

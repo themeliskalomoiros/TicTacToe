@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------------
 
 using GameEngine;
+using GameEngine.Events;
 using Xunit;
 
 //-----------------------------------------------------------------------------
@@ -48,12 +49,27 @@ public void SetMarkingAtSpecifiedPosition()
 // ----------------------------------------------------------------------------
 
 [Fact]
-public void RaiseOnMarkEvent()
+public void RaiseBoxMarkEvent()
 {
-  Assert.Raises<MarkEventArgs>( 
-    handler => sut.MarkEvent += handler,
-    handler => sut.MarkEvent -= handler,
+  Assert.Raises<BoxMarkingEventArgs>( 
+    handler => sut.BoxMarkEvent += handler,
+    handler => sut.BoxMarkEvent -= handler,
     () => sut.SetMarking(3, Marking.Circle));
+}
+
+// ----------------------------------------------------------------------------
+
+[Fact]
+public void RaiseBoxOccupiedEvent()
+{
+  Assert.Raises<BoxMarkingEventArgs>( 
+    handler => sut.BoxOccupiedEvent += handler,
+    handler => sut.BoxOccupiedEvent -= handler,
+    () => 
+    {
+      sut.SetMarking(3, Marking.Circle);
+      sut.SetMarking(3, Marking.Cross);
+    });
 }
 
 // ----------------------------------------------------------------------------

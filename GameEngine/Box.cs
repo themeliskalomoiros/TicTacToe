@@ -1,5 +1,6 @@
 ﻿//-----------------------------------------------------------------------------
 
+using GameEngine.Events;
 using System;
 using System.ComponentModel;
 
@@ -9,7 +10,7 @@ namespace GameEngine {
 
 //-----------------------------------------------------------------------------
 
-public class Box : INotifyPropertyChanged{
+public class Box{
 
 //-----------------------------------------------------------------------------
 
@@ -22,10 +23,10 @@ public Marking Marking
   get => marking; 
   set
   {
-    if (marking != value)
+    bool isNotSet = marking == Marking.None && value != Marking.None;
+    if (isNotSet)
     {
-      marking = value;
-      RaisePropertyChange(nameof(Marking));
+      RaiseMarkEvent(marking = value);
     }
     else
     {
@@ -41,8 +42,8 @@ public Marking Marking
 
 //-----------------------------------------------------------------------------
 
-public event PropertyChangedEventHandler PropertyChanged;
-public event EventHandler<AlreadyMarkedEventArgs> AlreadyMarkedEvent;
+public event EventHandler<MarkingEventArgs> MarkingEvent;
+public event EventHandler<MarkingEventArgs> MarkingOccupiedEvent;
 
 //-----------------------------------------------------------------------------
 
@@ -51,10 +52,10 @@ public event EventHandler<AlreadyMarkedEventArgs> AlreadyMarkedEvent;
 
 //-----------------------------------------------------------------------------
 
-private void RaisePropertyChange(
-  string propertyName)
+private void RaiseMarkEvent(
+  Marking marking)
 {
-  PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+  MarkingEvent?.Invoke(this, new MarkingEventArgs(marking));
 }
 
 //-----------------------------------------------------------------------------
@@ -62,7 +63,7 @@ private void RaisePropertyChange(
 private void RaiseAlreadyMarked(
   Marking marking)
 {
-  AlreadyMarkedEvent?.Invoke(this, new AlreadyMarkedEventArgs(marking));
+  MarkingOccupiedEvent?.Invoke(this, new MarkingEventArgs(marking));
 }
 
 //-----------------------------------------------------------------------------

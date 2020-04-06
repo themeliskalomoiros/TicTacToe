@@ -1,30 +1,36 @@
 ﻿//-----------------------------------------------------------------------------
 
-using System;
+using GameEngine;
+using Xunit;
 
 //-----------------------------------------------------------------------------
 
-namespace GameEngine {
+namespace GameEngine.Test {
 
 //-----------------------------------------------------------------------------
 
-public class MarkEventArgs : EventArgs{
-  
-//-----------------------------------------------------------------------------
-
-public int Position { get; set; }
+public class GameStateShould {
 
 //-----------------------------------------------------------------------------
 
-public Marking Marking { get; set; }
+#region Arrange
+
+//-----------------------------------------------------------------------------
+
+#endregion
+#region Tests
 
 // ----------------------------------------------------------------------------
 
-public MarkEventArgs(int position, Marking marking)
+[Fact]
+public void Start()
 {
-  Position = position;
-  Marking = marking;
+  
 }
+
+// ----------------------------------------------------------------------------
+
+#endregion
 
 // ----------------------------------------------------------------------------
 
@@ -33,4 +39,3 @@ public MarkEventArgs(int position, Marking marking)
 // ----------------------------------------------------------------------------
 
 } // <-- end of namespace body -->
-

@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------------
 
 using GameEngine;
+using GameEngine.Events;
 using System;
 using Xunit;
 
@@ -36,42 +37,27 @@ public void HaveDefaultMarkingToNone()
 //-----------------------------------------------------------------------------
 
 [Fact]
-public void RaisePropertyChanged()
+public void RaiseMarkingEvent()
 {
-  Assert.PropertyChanged(
-    sut,
-    nameof(sut.Marking),
-    () => sut.Marking = Marking.Circle);
+  Assert.Raises<MarkingEventArgs>(
+  handler => sut.MarkingEvent += handler,  
+  handler => sut.MarkingEvent -= handler,  
+  () => sut.Marking = Marking.Circle);
 }
 
 //-----------------------------------------------------------------------------
 
 [Fact]
-public void NotRaisePropertyChangeWhenSameValueIsSet()
+public void RaiseMarkingOccupiedEvent()
 {
-  int eventRaiseCount = 0;
-  sut.PropertyChanged += (s, e) => ++eventRaiseCount;
-
-  sut.Marking = Marking.Circle;
-  Assert.Equal(1, eventRaiseCount);
-
-  sut.Marking = Marking.Circle;
-  Assert.Equal(1, eventRaiseCount);
-}
-
-//-----------------------------------------------------------------------------
-
-[Fact]
-public void RaiseAlreadyMarkedWhenSameValueIsSet()
-{
-  Assert.Raises<AlreadyMarkedEventArgs>(
-    handler => sut.AlreadyMarkedEvent += handler,
-    handler => sut.AlreadyMarkedEvent -= handler,
+  Assert.Raises<MarkingEventArgs>(
+    handler => sut.MarkingOccupiedEvent += handler,
+    handler => sut.MarkingOccupiedEvent -= handler,
     () => 
     {
       sut.Marking = Marking.Circle;
-      sut.Marking = Marking.Circle;
-    });
+      sut.Marking = Marking.Cross;
+    });    
 }
 
 // ----------------------------------------------------------------------------
