@@ -27,6 +27,10 @@ public Marking Marking
       marking = value;
       RaisePropertyChange(nameof(Marking));
     }
+    else
+    {
+      RaiseAlreadyMarked(Marking);
+    }
   }
 }
 
@@ -38,6 +42,7 @@ public Marking Marking
 //-----------------------------------------------------------------------------
 
 public event PropertyChangedEventHandler PropertyChanged;
+public event EventHandler<AlreadyMarkedEventArgs> AlreadyMarkedEvent;
 
 //-----------------------------------------------------------------------------
 
@@ -46,9 +51,18 @@ public event PropertyChangedEventHandler PropertyChanged;
 
 //-----------------------------------------------------------------------------
 
-private void RaisePropertyChange(string propertyName)
+private void RaisePropertyChange(
+  string propertyName)
 {
   PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+}
+
+//-----------------------------------------------------------------------------
+
+private void RaiseAlreadyMarked(
+  Marking marking)
+{
+  AlreadyMarkedEvent?.Invoke(this, new AlreadyMarkedEventArgs(marking));
 }
 
 //-----------------------------------------------------------------------------

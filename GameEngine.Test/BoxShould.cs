@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------------
 
 using GameEngine;
+using System;
 using Xunit;
 
 //-----------------------------------------------------------------------------
@@ -56,6 +57,21 @@ public void NotRaisePropertyChangeWhenSameValueIsSet()
 
   sut.Marking = Marking.Circle;
   Assert.Equal(1, eventRaiseCount);
+}
+
+//-----------------------------------------------------------------------------
+
+[Fact]
+public void RaiseAlreadyMarkedWhenSameValueIsSet()
+{
+  Assert.Raises<AlreadyMarkedEventArgs>(
+    handler => sut.AlreadyMarkedEvent += handler,
+    handler => sut.AlreadyMarkedEvent -= handler,
+    () => 
+    {
+      sut.Marking = Marking.Circle;
+      sut.Marking = Marking.Circle;
+    });
 }
 
 // ----------------------------------------------------------------------------
