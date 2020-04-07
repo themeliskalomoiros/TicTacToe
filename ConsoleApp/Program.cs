@@ -14,11 +14,9 @@ public class Program {
 
 static void Main(string[] args)
 {
-  //Console.WriteLine("Who plays first, Crosses or Circles?\t(Reply with 'X' or 'O')");
-  var messages = new MessagePrinter();
-  messages.PrintWelcome();
-  
-  var reply = Console.ReadLine();
+  UserOutput.WriteWelcome();
+  UserOutput.WriteWhoPlaysFirst();
+  var game = UserInput.ReadGame();
 
   Console.ReadLine();
 }

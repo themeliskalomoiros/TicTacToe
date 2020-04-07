@@ -10,7 +10,7 @@ namespace ConsoleApp {
 
 //-----------------------------------------------------------------------------
 
-public class MessagePrinter {
+public static class UserOutput {
 
 //-----------------------------------------------------------------------------
 
@@ -18,7 +18,15 @@ public class MessagePrinter {
 
 //-----------------------------------------------------------------------------
 
-public void PrintWelcome()
+public static void WriteWhoPlaysFirst()
+{
+  var s = "\nWho plays first? Crosses or Circles?\t(Apply with 'X' or 'O')\n";
+  Console.WriteLine(s);
+}
+
+//-----------------------------------------------------------------------------
+
+public static void WriteWelcome()
 {
   var welcome = GetWelcomeMessage();
   for (int i = 0; i < welcome.Length; i++)
@@ -26,6 +34,8 @@ public void PrintWelcome()
     Thread.Sleep(1);
     Console.Write(welcome[i]);
   }
+
+  Console.WriteLine();
 }
 
 //-----------------------------------------------------------------------------
@@ -35,7 +45,7 @@ public void PrintWelcome()
 
 //-----------------------------------------------------------------------------
 
-private string GetWelcomeMessage()
+private static string GetWelcomeMessage()
 {
   var sb = new StringBuilder();
   for (int i = 0; i < LineHeight; i++)
@@ -56,7 +66,7 @@ private string GetWelcomeMessage()
 
 //-----------------------------------------------------------------------------
 
-private string GetWelcomeLine()
+private static string GetWelcomeLine()
 {
   var sb = new StringBuilder();
   for (int i = 0; i < LineWidth; i++)
@@ -67,9 +77,9 @@ private string GetWelcomeLine()
 
 //-----------------------------------------------------------------------------
 
-private string GetWelcomeLineWithText()
+private static string GetWelcomeLineWithText()
 {
-  var text = "TIC - TAC - TOE";
+  var text = " The TIC-TAC-TOE Game ";
   var line = GetWelcomeLine();
   var lineWithText = line.Insert(line.Length / 2 - text.Length / 2, text);
   return lineWithText.Remove(line.Length);
@@ -79,6 +89,8 @@ private string GetWelcomeLineWithText()
 
 #endregion
 #region Fields
+
+//-----------------------------------------------------------------------------
 
 private const int LineWidth = 70;
 private const int LineHeight = 10;
