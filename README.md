@@ -29,9 +29,7 @@ Visual Studio IDE would extremely helpful but is not obligatory.
 
 ## Authors
 
-* **Themelis Kalomoiros** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Themelis Kalomoiros**
 
 ## License
 
