@@ -11,9 +11,9 @@ Download the solution and open it with your Visual Studio.
 Set as startup project the *ConsoleApp* and run it. 
 
 Alternatively, 
-	1. Open a terminal
-	2. Navigate to *ConsoleApp* project
-	3. Run the game with `dotnet run Program.cs`
+1. Open a terminal
+2. Navigate to *ConsoleApp* project
+3. Run the game with `dotnet run Program.cs`
 
 ### Prerequisites
 
