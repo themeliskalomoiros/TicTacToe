@@ -106,6 +106,9 @@ private void Populate(
   Box[] boxes)
 {
   
+  // TODO: There's a bug if I use the commented code
+  // the position being raised is always 9!
+
 //for (int i = 0; i < boxes.Length; i++)
   //{
   //  var b = new Box();
