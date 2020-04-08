@@ -30,7 +30,7 @@ public Marking Marking
     }
     else
     {
-      RaiseAlreadyMarked(Marking);
+      RaiseMarkingOccupiedEvent(Marking);
     }
   }
 }
@@ -60,7 +60,7 @@ private void RaiseMarkEvent(
 
 //-----------------------------------------------------------------------------
 
-private void RaiseAlreadyMarked(
+private void RaiseMarkingOccupiedEvent(
   Marking marking)
 {
   MarkingOccupiedEvent?.Invoke(this, new MarkingEventArgs(marking));

@@ -74,7 +74,7 @@ public Board()
 
 //-----------------------------------------------------------------------------
 
-private void OnMark(
+private void OnBoxMark(
   int position,
   Marking marking)
 {
@@ -83,7 +83,7 @@ private void OnMark(
 
 //-----------------------------------------------------------------------------
 
-private void OnAlreadyMarked(
+private void OnBoxMarkOccupied(
   int position,
   Marking marking)
 {
@@ -98,8 +98,8 @@ private void Populate(
   for (int i = 0; i < boxes.Length; i++)
   {
     var b = new Box();
-    b.MarkingEvent += (s, e) => OnMark(i, b.Marking);
-    b.MarkingOccupiedEvent += (s, e) => OnAlreadyMarked(i, b.Marking);
+    b.MarkingEvent += (s, e) => OnBoxMark(i, b.Marking);
+    b.MarkingOccupiedEvent += (s, e) => OnBoxMarkOccupied(i, b.Marking);
     boxes[i] = b;
   }
 }
