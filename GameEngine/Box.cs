@@ -3,6 +3,7 @@
 using GameEngine.Events;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 
 //-----------------------------------------------------------------------------
 
@@ -63,6 +64,7 @@ private void RaiseMarkEvent(
 private void RaiseMarkingOccupiedEvent(
   Marking marking)
 {
+  Debug.WriteLine($"Box with {marking} reports occupied.");
   MarkingOccupiedEvent?.Invoke(this, new MarkingEventArgs(marking));
 }
 
