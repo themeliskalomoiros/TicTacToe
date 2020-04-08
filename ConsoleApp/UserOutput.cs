@@ -1,5 +1,6 @@
 ﻿//-----------------------------------------------------------------------------
 
+using GameEngine;
 using System;
 using System.Text;
 using System.Threading;
@@ -18,7 +19,58 @@ public static class UserOutput {
 
 //-----------------------------------------------------------------------------
 
-public static void WriteWhoPlaysFirst()
+public static void Print(Result result)
+{
+  Console.WriteLine("Game Over!");
+  
+  switch (result)
+  {
+    case Result.CrossesWin:
+      Console.WriteLine("Congratulations Crosses, you win!");
+      break;
+    case Result.CirclesWin:
+      Console.WriteLine("Congratulations Circles, you win!");
+      break;
+    default:
+      Console.WriteLine("It's a draw!");
+      break;
+  }
+  
+  Console.WriteLine();
+}
+
+//-----------------------------------------------------------------------------
+
+public static void PrintInstructions()
+{
+  Console.WriteLine(
+    "How to Play:" +
+    "\n\t1. Choose who plays first (Crosses or Circles)." +
+    "\n\t2. To move select an available position on the boarder.");
+  Console.WriteLine();
+}
+
+//-----------------------------------------------------------------------------
+
+public static void PrintCrossesMakeMove()
+{
+  Console.WriteLine();
+  Console.WriteLine("Crosses it's your move.\t(Choose a position to place a cross)");
+  Console.WriteLine();
+}
+
+//-----------------------------------------------------------------------------
+
+public static void PrintCirclesMakeMove()
+{
+  Console.WriteLine();
+  Console.WriteLine("Circles it's your move.\t(Choose a position to place a circle)");
+  Console.WriteLine();
+}
+
+//-----------------------------------------------------------------------------
+
+public static void PrintWhoPlaysFirst()
 {
   var s = "\nWho plays first? Crosses or Circles?\t(Apply with 'X' or 'O')\n";
   Console.WriteLine(s);
@@ -26,7 +78,7 @@ public static void WriteWhoPlaysFirst()
 
 //-----------------------------------------------------------------------------
 
-public static void WriteWelcome()
+public static void PrintWelcome()
 {
   var welcome = GetWelcomeMessage();
   for (int i = 0; i < welcome.Length; i++)
@@ -35,6 +87,7 @@ public static void WriteWelcome()
     Console.Write(welcome[i]);
   }
 
+  Console.WriteLine();
   Console.WriteLine();
 }
 

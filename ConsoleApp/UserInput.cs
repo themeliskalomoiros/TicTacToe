@@ -17,20 +17,28 @@ public static class UserInput {
 
 #region Public Methods
 
+//-----------------------------------------------------------------------------
+
 public static GameState ReadGame()
 {
   var s = Console.ReadLine();
 
   if (s.ToUpper() == "O")
   {
-    Console.WriteLine("Circles plays first!");
     return new GameState(false);
   }
   else
   {
-    Console.WriteLine("Crosses plays first!");
     return new GameState();
   }
+}
+
+//-----------------------------------------------------------------------------
+
+public static int ReadMove()
+{
+  var input = Console.ReadLine();
+  return int.Parse(input) - 1;
 }
 
 //-----------------------------------------------------------------------------
