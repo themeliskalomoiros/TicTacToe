@@ -11,9 +11,9 @@ Download the solution and open it with your Visual Studio.
 Set as startup project the *ConsoleApp* and run it. 
 
 Alternatively, 
-	1. Open a terminal
-	2. Navigate to *ConsoleApp* project
-	3. Run the game with `dotnet run Program.cs`
+1. Open a terminal
+2. Navigate to *ConsoleApp* project
+3. Run the game with `dotnet run Program.cs`
 
 ### Prerequisites
 
@@ -23,9 +23,9 @@ Visual Studio IDE would extremely helpful but is not obligatory.
 ## Built With
 
 * [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - The language used
-* [.NetCore](https://maven.apache.org/) - Framework Used
-* [XUnit](https://rometools.github.io/rome/) - Testing Framework Used
-* [Visual Studio 2017](https://rometools.github.io/rome/) - IDE used
+* [.NetCore](https://dotnet.microsoft.com/download/dotnet-core/2.1) - Framework Used
+* [XUnit](https://xunit.net/) - Testing Framework Used
+* [Visual Studio 2017](https://visualstudio.microsoft.com/vs/whatsnew/) - IDE used
 
 ## Authors
 
