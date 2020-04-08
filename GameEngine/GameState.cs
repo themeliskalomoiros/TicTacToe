@@ -4,7 +4,6 @@ using GameEngine.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Text;
 
 //-----------------------------------------------------------------------------
@@ -100,7 +99,6 @@ private void Board_BoxOccupiedEvent(
   object s, 
   BoxMarkingEventArgs e)
 {
-  Debug.WriteLine($"Game reports that the box of board with position {e.Position} is occupied.");
   MarkOccupiedEvent?.Invoke(this, e);
 }
 
