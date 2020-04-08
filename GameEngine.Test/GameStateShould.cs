@@ -28,6 +28,34 @@ private GameState sut = new GameState();
 // ----------------------------------------------------------------------------
 
 [Fact]
+public void RaiseMarkOccupiedEvent()
+{
+  Assert.Raises<BoxMarkingEventArgs>(
+    handler => sut.MarkOccupiedEvent += handler,
+    handler => sut.MarkOccupiedEvent -= handler,
+    () => 
+    {
+      sut.Mark(0);
+      sut.Mark(0);
+    });
+}
+
+// ----------------------------------------------------------------------------
+
+[Fact]
+public void ChangeTurnFlagOnlyIfTheMarkWasSuccessful()
+{
+  // Crosses plays
+  sut.Mark(0);
+  // Circle plays a forbiden move
+  sut.Mark(0);
+
+  Assert.False(sut.IsCrossesTurn);
+}
+
+// ----------------------------------------------------------------------------
+
+[Fact]
 public void StartWithCrossesTurnByDefault()
 {
   Assert.True(sut.IsCrossesTurn);

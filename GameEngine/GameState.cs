@@ -33,7 +33,15 @@ public bool IsCrossesTurn { get; private set; } = true;
 public void Mark(
   int position)
 {
-  ReportMarking(position);
+  if (IsCrossesTurn)
+  {
+    board.SetMarking(position, Marking.Cross);
+   
+  }
+  else
+  {
+    board.SetMarking(position, Marking.Circle);
+  }
   ReportResult();
 }
 
@@ -56,6 +64,8 @@ public GameState(
   bool isCrossesTurn = true)
 {
   IsCrossesTurn = isCrossesTurn;
+  board.BoxMarkEvent += Board_BoxMarkEvent;
+  board.BoxOccupiedEvent += Board_BoxOccupiedEvent;
 }
 
 //-----------------------------------------------------------------------------
@@ -68,11 +78,41 @@ public GameState(
 public event EventHandler<CrossesMarkEventArgs> CrossesMarkEvent;
 public event EventHandler<CirclesMarkEventArgs> CirclesMarkEvent;
 public event EventHandler<CompletionEventArgs> CompletionEvent;
+public event EventHandler<BoxMarkingEventArgs> MarkOccupiedEvent;
 
 //-----------------------------------------------------------------------------
 
 #endregion
 #region Private Methods
+
+//-----------------------------------------------------------------------------
+
+private void Board_BoxOccupiedEvent(
+  object s, 
+  BoxMarkingEventArgs e)
+{
+  MarkOccupiedEvent?.Invoke(this, e);
+}
+
+//-----------------------------------------------------------------------------
+
+private void Board_BoxMarkEvent(
+  object s, 
+  BoxMarkingEventArgs e)
+{
+  if (e.Marking == Marking.Cross)
+  {
+    IsCrossesTurn = false;
+    crossPositions.Append(e.Position);
+    RaiseCrossesMarkEvent(e.Position);
+  }
+  else
+  {
+    IsCrossesTurn = true;
+    circlePositions.Append(e.Position);
+    RaiseCirclesMarkEvent(e.Position);
+  }
+}
 
 //-----------------------------------------------------------------------------
 
@@ -92,9 +132,10 @@ private void RaiseCirclesMarkEvent(
 
 //-----------------------------------------------------------------------------
 
-private void RaiseCompletionEvent(Result result)
+private void RaiseCompletionEvent(
+  Result r)
 {
-  CompletionEvent?.Invoke(this, new CompletionEventArgs(result));
+  CompletionEvent?.Invoke(this, new CompletionEventArgs(r));
 }
 
 //-----------------------------------------------------------------------------
@@ -142,26 +183,6 @@ private bool HasWon(string positions)
     positions.Contains("258") ||
     positions.Contains("048") ||
     positions.Contains("246");  
-}
-
-//-----------------------------------------------------------------------------
-
-private void ReportMarking(int position)
-{
-  if (IsCrossesTurn)
-  {
-    board.SetMarking(position, Marking.Cross);
-    IsCrossesTurn = false;
-    crossPositions.Append(position);
-    RaiseCrossesMarkEvent(position);
-  }
-  else
-  {
-    board.SetMarking(position, Marking.Circle);
-    IsCrossesTurn = true;
-    circlePositions.Append(position);
-    RaiseCirclesMarkEvent(position);
-  }
 }
 
 //-----------------------------------------------------------------------------
