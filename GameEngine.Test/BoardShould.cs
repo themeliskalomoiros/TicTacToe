@@ -2,6 +2,7 @@
 
 using GameEngine;
 using GameEngine.Events;
+using System;
 using Xunit;
 
 //-----------------------------------------------------------------------------
@@ -94,6 +95,20 @@ public void RaiseBoxOccupiedEvent()
     {
       sut.SetMarking(3, Marking.Circle);
       sut.SetMarking(3, Marking.Circle);
+    });
+}
+
+// ----------------------------------------------------------------------------
+
+[Fact]
+public void RaiseBoxMarkFailEvent()
+{
+  Assert.Raises<EventArgs>( 
+    handler => sut.BoxMarkFailEvent += handler,
+    handler => sut.BoxMarkFailEvent -= handler,
+    () => 
+    {
+      sut.SetMarking(-1, Marking.Circle);
     });
 }
 

@@ -41,6 +41,7 @@ public void Mark(
   {
     board.SetMarking(position, Marking.Circle);
   }
+  
   ReportResult();
 }
 
@@ -65,6 +66,7 @@ public GameState(
   IsCrossesTurn = isCrossesTurn;
   board.BoxMarkEvent += Board_BoxMarkEvent;
   board.BoxOccupiedEvent += Board_BoxOccupiedEvent;
+  board.BoxMarkFailEvent += Board_BoxMarkFailEvent;
 }
 
 //-----------------------------------------------------------------------------
@@ -74,6 +76,7 @@ public GameState(
 
 //-----------------------------------------------------------------------------
 
+public event EventHandler<EventArgs> MarkFailedEvent;
 public event EventHandler<CrossesMarkEventArgs> CrossesMarkEvent;
 public event EventHandler<CirclesMarkEventArgs> CirclesMarkEvent;
 public event EventHandler<CompletionEventArgs> CompletionEvent;
@@ -83,6 +86,13 @@ public event EventHandler<BoxMarkingEventArgs> MarkOccupiedEvent;
 
 #endregion
 #region Private Methods
+
+//-----------------------------------------------------------------------------
+
+private void Board_BoxMarkFailEvent(object sender, EventArgs e)
+{
+  MarkFailedEvent?.Invoke(this, e);
+}
 
 //-----------------------------------------------------------------------------
 
@@ -103,13 +113,13 @@ private void Board_BoxMarkEvent(
   if (e.Marking == Marking.Cross)
   {
     IsCrossesTurn = false;
-    crossPositions.Append(e.Position);
+    crossPositions.Add(e.Position);
     RaiseCrossesMarkEvent(e.Position);
   }
   else
   {
     IsCrossesTurn = true;
-    circlePositions.Append(e.Position);
+    circlePositions.Add(e.Position);
     RaiseCirclesMarkEvent(e.Position);
   }
 }
@@ -142,12 +152,12 @@ private void RaiseCompletionEvent(
 
 private void ReportResult()
 {
-  bool winIsPossible = crossPositions.Length + circlePositions.Length >= 5;
+  bool winIsPossible = crossPositions.Count + circlePositions.Count>= 5;
   if (winIsPossible)
   {
     if (IsCrossesTurn)
     {
-      if (HasWon(circlePositions.ToString()))
+      if (HasWon(circlePositions))
       {
         RaiseCompletionEvent(Result.CirclesWin);
         return;
@@ -155,14 +165,14 @@ private void ReportResult()
     }
     else
     {
-      if (HasWon(crossPositions.ToString()))
+      if (HasWon(crossPositions))
       {
         RaiseCompletionEvent(Result.CrossesWin);
         return;
       }
     }
 
-    bool allMarked = crossPositions.Length + circlePositions.Length == 9;
+    bool allMarked = crossPositions.Count + circlePositions.Count == 9;
     if (allMarked)
     {
       RaiseCompletionEvent(Result.Draw);
@@ -172,17 +182,17 @@ private void ReportResult()
 
 //-----------------------------------------------------------------------------
 
-private bool HasWon(string positions)
+private bool HasWon(List<int> positions)
 {
   return 
-    positions.Contains("012") ||
-    positions.Contains("345") ||
-    positions.Contains("678") ||
-    positions.Contains("036") ||
-    positions.Contains("147") ||
-    positions.Contains("258") ||
-    positions.Contains("048") ||
-    positions.Contains("246");  
+    positions.Contains(0) && positions.Contains(1) && positions.Contains(2) ||
+    positions.Contains(3) && positions.Contains(4) && positions.Contains(5) ||
+    positions.Contains(6) && positions.Contains(7) && positions.Contains(8) ||
+    positions.Contains(0) && positions.Contains(3) && positions.Contains(6) ||
+    positions.Contains(1) && positions.Contains(4) && positions.Contains(7) ||
+    positions.Contains(2) && positions.Contains(5) && positions.Contains(8) ||
+    positions.Contains(0) && positions.Contains(4) && positions.Contains(8) ||
+    positions.Contains(2) && positions.Contains(4) && positions.Contains(6);
 }
 
 //-----------------------------------------------------------------------------
@@ -196,8 +206,8 @@ private Board board = new Board();
 
 //-----------------------------------------------------------------------------
 
-private StringBuilder crossPositions = new StringBuilder();
-private StringBuilder circlePositions = new StringBuilder();
+private List<int> crossPositions = new List<int>();
+private List<int> circlePositions = new List<int>();
 
 //-----------------------------------------------------------------------------
 

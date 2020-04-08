@@ -35,10 +35,10 @@ public static GameState ReadGame()
 
 //-----------------------------------------------------------------------------
 
-public static int ReadMove()
+public static bool ReadMove(out int move)
 {
   var input = Console.ReadLine();
-  return int.Parse(input) - 1;
+  return int.TryParse(input, out move);
 }
 
 //-----------------------------------------------------------------------------

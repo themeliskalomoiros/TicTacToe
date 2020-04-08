@@ -43,6 +43,17 @@ public void RaiseMarkOccupiedEvent()
 // ----------------------------------------------------------------------------
 
 [Fact]
+public void RaiseMarkFailEvent()
+{
+  Assert.Raises<EventArgs>(
+    handler => sut.MarkFailedEvent += handler,
+    handler => sut.MarkFailedEvent -= handler,
+    () => sut.Mark(-1));
+}
+
+// ----------------------------------------------------------------------------
+
+[Fact]
 public void ChangeTurnFlagOnlyIfTheMarkWasSuccessful()
 {
   // Crosses plays
@@ -143,41 +154,32 @@ public void ReportDraw()
 
 // ----------------------------------------------------------------------------
 
-[Fact]
-public void ReportCrossesWin()
+[Theory]
+[InlineData(new int[]{4,1,2,3,6})]
+public void ReportCrossesWin(int[] moves)
 {
-  Action win = () => 
-  {
-    sut.Mark(4);
-    sut.Mark(1);
-    sut.Mark(2);
-    sut.Mark(3);
-    sut.Mark(7);
-  };
+  var result = Result.Draw;
+  sut.CompletionEvent += (s, e) => result = e.Result;
 
-  sut.CompletionEvent += (s, e) => Assert.Equal(Result.Draw, e.Result);
+  for (int i = 0; i < moves.Length; i++)
+    sut.Mark(moves[i]);
 
-  win();
+  Assert.Equal(Result.CrossesWin, result);
 }
 
 // ----------------------------------------------------------------------------
 
-[Fact]
-public void ReportCirclesWin()
+[Theory]
+[InlineData(new int[]{4,0,1,7,2,6,5,3})]
+public void ReportCirclessWin(int[] moves)
 {
-  Action win = () => 
-  {
-    sut.Mark(4);
-    sut.Mark(0);
-    sut.Mark(8);
-    sut.Mark(2);
-    sut.Mark(7);
-    sut.Mark(1);
-  };
+  var result = Result.Draw;
+  sut.CompletionEvent += (s, e) => result = e.Result;
 
-  sut.CompletionEvent += (s, e) => Assert.Equal(Result.Draw, e.Result);
+  for (int i = 0; i < moves.Length; i++)
+    sut.Mark(moves[i]);
 
-  win();
+  Assert.Equal(Result.CirclesWin, result);
 }
 
 // ----------------------------------------------------------------------------

@@ -40,7 +40,16 @@ public static void Main(string[] args)
       UserOutput.PrintCirclesMakeMove();
     }
 
-    game.Mark(UserInput.ReadMove());
+    int move;
+    if (UserInput.ReadMove(out move))
+    {
+      var zeroBased = move - 1;
+      game.Mark(zeroBased);
+    }
+    else
+    {
+      UserOutput.PrintNotValidMove();
+    }
   }
 }
 
@@ -57,6 +66,7 @@ private static void AttachListenersTo(GameState game)
   game.CirclesMarkEvent += Game_CirclesMarkEvent;
   game.CrossesMarkEvent += Game_CrossesMarkEvent;
   game.MarkOccupiedEvent += Game_MarkOccupiedEvent;
+  game.MarkFailedEvent += Game_MarkFailedEvent;
 }
 
 //-----------------------------------------------------------------------------
@@ -94,7 +104,15 @@ private static void Game_MarkOccupiedEvent(
   object s, 
   BoxMarkingEventArgs e)
 {
-  Console.WriteLine("There is already an "+e.Marking+" at position "+e.Position);
+  Console.WriteLine("There is already a " + e.Marking + " at position " + (e.Position + 1));
+}
+
+//-----------------------------------------------------------------------------
+
+private static void Game_MarkFailedEvent(object sender, EventArgs e)
+{
+  UserOutput.PrintNotValidMove();
+  UserOutput.PrintValidMoveRange();
 }
 
 //-----------------------------------------------------------------------------

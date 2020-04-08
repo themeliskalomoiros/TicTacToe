@@ -34,7 +34,14 @@ public void SetMarking(
   int position, 
   Marking marking)
 {
-  boxes[position].Marking = marking;
+  try
+  {
+    boxes[position].Marking = marking;
+  }
+  catch (IndexOutOfRangeException)
+  {
+    BoxMarkFailEvent?.Invoke(this, new EventArgs());
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -53,6 +60,7 @@ public Marking GetMarking(
 //-----------------------------------------------------------------------------
 
 public event EventHandler<BoxMarkingEventArgs> BoxMarkEvent;
+public event EventHandler<EventArgs> BoxMarkFailEvent;
 public event EventHandler<BoxMarkingEventArgs> BoxOccupiedEvent;
 
 //-----------------------------------------------------------------------------

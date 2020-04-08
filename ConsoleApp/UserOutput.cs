@@ -52,6 +52,13 @@ public static void PrintInstructions()
 
 //-----------------------------------------------------------------------------
 
+public static void PrintNotValidMove()
+{
+  Console.WriteLine("That was not a valid move!");
+}
+
+//-----------------------------------------------------------------------------
+
 public static void PrintCrossesMakeMove()
 {
   Console.WriteLine();
@@ -89,6 +96,13 @@ public static void PrintWelcome()
 
   Console.WriteLine();
   Console.WriteLine();
+}
+
+//-----------------------------------------------------------------------------
+
+public static void PrintValidMoveRange()
+{
+  Console.Write("Valid moves are {1, 2, 3, 4, 5, 6, 7, 8, 9}");
 }
 
 //-----------------------------------------------------------------------------
