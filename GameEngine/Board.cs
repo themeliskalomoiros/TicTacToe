@@ -106,6 +106,8 @@ private void Populate(
   for (int i = 0; i < boxes.Length; i++)
   {
     var b = new Box();
+    // Must create a copy, see 
+    // https://stackoverflow.com/questions/61104500/wrong-value-when-event-handlers-are-attached-in-a-for-loop?noredirect=1#comment108101869_61104500
     var position = i;
     b.MarkingEvent += (s, e) => OnBoxMark(position, e.Marking);
     b.MarkingOccupiedEvent += (s, e) => OnBoxMarkOccupied(position, e.Marking);

@@ -3,12 +3,12 @@
 The classic game of Tic Tac Toe, currently implemented as a console application. 
 Code is written in C# and .NetCore. 
 
-The game engine is also included (and its unit tests).
+The game engine is also included (alongside its unit tests).
 
 ## Getting Started
 
 Download the solution and open it with your Visual Studio.
-Set as startup project the *ConsoleApp* and run it. 
+Set as startup project the *ConsoleApp* and debug it. 
 
 Alternatively, 
 1. Open a terminal
@@ -18,14 +18,14 @@ Alternatively,
 ### Prerequisites
 
 Must have **.NetCore 2.1.** (and **XUnit** if you need to run the tests).
-Visual Studio IDE would extremely helpful but is not obligatory.
+Visual Studio would be extremely helpful but is not obligatory.
 
 ## Built With
 
-* [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - The language used
-* [.NetCore](https://dotnet.microsoft.com/download/dotnet-core/2.1) - Framework Used
-* [XUnit](https://xunit.net/) - Testing Framework Used
-* [Visual Studio 2017](https://visualstudio.microsoft.com/vs/whatsnew/) - IDE used
+* [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - The language
+* [.NetCore](https://dotnet.microsoft.com/download/dotnet-core/2.1) - Framework
+* [XUnit](https://xunit.net/) - Testing Framework
+* [Visual Studio 2017](https://visualstudio.microsoft.com/vs/whatsnew/) - IDE
 
 ## Authors
 
