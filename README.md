@@ -25,7 +25,6 @@ Visual Studio would be extremely helpful but is not obligatory.
 * [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - The language
 * [.NetCore](https://dotnet.microsoft.com/download/dotnet-core/2.1) - Framework
 * [XUnit](https://xunit.net/) - Testing Framework
-* [Visual Studio 2017](https://visualstudio.microsoft.com/vs/whatsnew/) - IDE
 
 ## Authors
 
