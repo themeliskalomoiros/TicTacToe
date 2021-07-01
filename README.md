@@ -22,9 +22,9 @@ Visual Studio would be extremely helpful but is not obligatory.
 
 ## Built With
 
-* [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - The language
-* [.NetCore](https://dotnet.microsoft.com/download/dotnet-core/2.1) - Framework
-* [XUnit](https://xunit.net/) - Testing Framework
+* [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
+* [.NetCore](https://dotnet.microsoft.com/download/dotnet-core/2.1)
+* [XUnit](https://xunit.net/)
 
 ## Authors
 
