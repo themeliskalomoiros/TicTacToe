@@ -24,8 +24,8 @@ public static void Main(string[] args)
   UserOutput.PrintWelcome();
   UserOutput.PrintInstructions();
   BoardDrawer.DrawBoardWithPositions();
-
   UserOutput.PrintWhoPlaysFirst();
+  
   var game = UserInput.ReadGame();
   AttachListenersTo(game);
 
@@ -43,8 +43,7 @@ public static void Main(string[] args)
     int move;
     if (UserInput.ReadMove(out move))
     {
-      var zeroBased = move - 1;
-      game.Mark(zeroBased);
+      game.Mark(move);
     }
     else
     {

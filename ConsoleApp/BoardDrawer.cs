@@ -22,7 +22,7 @@ public static class BoardDrawer {
 public static void DrawBoardWithPositions()
 {
   Console.WriteLine("\tBoarder Positions");
-  Console.WriteLine("\t1 | 2 | 3\n\n\t4 | 5 | 6\n\n\t7 | 8 | 9");
+  Console.WriteLine($"\t1 | 2 | 3\n\t{LineInBetween}\n\t4 | 5 | 6\n\t{LineInBetween}\n\t7 | 8 | 9");
   Console.WriteLine();
 }
 
@@ -39,9 +39,15 @@ public static void DrawBoardOf(
       var m0 = game.GetMark(i);
       var m1 = game.GetMark(i+1);
       var m2 = game.GetMark(i+2);
-      sb.Append("\n");
-      sb.Append("\t" + GetBoardLine(m0,m1,m2));
-      sb.Append("\n");
+
+      sb.Append('\n');
+      sb.Append("\t" + GetBoardLine(m0, m1, m2));
+      sb.Append('\n');
+    }
+
+    if (i == 2 || i == 5)
+    {
+      sb.Append("\t" + LineInBetween);
     }
   }
 
@@ -71,7 +77,7 @@ private static string GetSymbolOf(Marking m)
       return "X";
     
     default:
-      return "_";
+      return " ";
   }
 }
 
@@ -79,6 +85,15 @@ private static string GetSymbolOf(Marking m)
 
 #endregion
 #region Private Static Methods
+
+//-----------------------------------------------------------------------------
+
+#endregion
+#region Constants
+
+//-----------------------------------------------------------------------------
+
+private const string LineInBetween = "---------";
 
 //-----------------------------------------------------------------------------
 

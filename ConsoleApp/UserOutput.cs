@@ -45,8 +45,8 @@ public static void PrintInstructions()
 {
   Console.WriteLine(
     "How to Play:" +
-    "\n\t1. Choose who plays first (Crosses or Circles)." +
-    "\n\t2. To move select an available position on the boarder.");
+    "\n\t1. Choose who plays first: X's or O's." +
+    "\n\t2. To make a move, select an available position on the board.");
   Console.WriteLine();
 }
 
@@ -54,7 +54,7 @@ public static void PrintInstructions()
 
 public static void PrintNotValidMove()
 {
-  Console.WriteLine("That was not a valid move!");
+  Console.WriteLine("Oops! That move isn't valid.");
 }
 
 //-----------------------------------------------------------------------------
@@ -62,7 +62,7 @@ public static void PrintNotValidMove()
 public static void PrintCrossesMakeMove()
 {
   Console.WriteLine();
-  Console.WriteLine("Crosses it's your move.\t(Choose a position to place a cross)");
+  Console.WriteLine("Crosses, your move!\t(Decide where to place your X)");
   Console.WriteLine();
 }
 
@@ -71,7 +71,7 @@ public static void PrintCrossesMakeMove()
 public static void PrintCirclesMakeMove()
 {
   Console.WriteLine();
-  Console.WriteLine("Circles it's your move.\t(Choose a position to place a circle)");
+  Console.WriteLine("Circles, your move!\t(Decide where to place your O)");
   Console.WriteLine();
 }
 
@@ -90,7 +90,7 @@ public static void PrintWelcome()
   var welcome = GetWelcomeMessage();
   for (int i = 0; i < welcome.Length; i++)
   {
-    Thread.Sleep(1);
+    Thread.Sleep(4);
     Console.Write(welcome[i]);
   }
 
@@ -102,7 +102,7 @@ public static void PrintWelcome()
 
 public static void PrintValidMoveRange()
 {
-  Console.Write("Valid moves are {1, 2, 3, 4, 5, 6, 7, 8, 9}");
+  Console.Write("Allowed positions: 1, 2, 3, 4, 5, 6, 7, 8, 9");
 }
 
 //-----------------------------------------------------------------------------
@@ -118,7 +118,7 @@ private static string GetWelcomeMessage()
   for (int i = 0; i < LineHeight; i++)
   {
     sb.Append("\n");
-    if (i == LineHeight / 2 - 1)
+    if (i == 1)
     {
       sb.Append(GetWelcomeLineWithText());
     }
@@ -146,7 +146,7 @@ private static string GetWelcomeLine()
 
 private static string GetWelcomeLineWithText()
 {
-  var text = " The TIC-TAC-TOE Game ";
+  var text = " Welcome to Tic-Tac-Toe! ";
   var line = GetWelcomeLine();
   var lineWithText = line.Insert(line.Length / 2 - text.Length / 2, text);
   return lineWithText.Remove(line.Length);
@@ -160,7 +160,7 @@ private static string GetWelcomeLineWithText()
 //-----------------------------------------------------------------------------
 
 private const int LineWidth = 70;
-private const int LineHeight = 10;
+private const int LineHeight = 3;
 
 //-----------------------------------------------------------------------------
 

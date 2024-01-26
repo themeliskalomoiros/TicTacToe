@@ -32,13 +32,14 @@ public bool IsCrossesTurn { get; private set; } = true;
 public void Mark(
   int position)
 {
+  var zeroBasedPosition = position - 1;
   if (IsCrossesTurn)
   {
-    board.SetMarking(position, Marking.Cross);
+    board.SetMarking(zeroBasedPosition, Marking.Cross);
   }
   else
   {
-    board.SetMarking(position, Marking.Circle);
+    board.SetMarking(zeroBasedPosition, Marking.Circle);
   }
   
   ReportResult();
