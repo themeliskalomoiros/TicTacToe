@@ -1,27 +1,40 @@
 # Tic Tac Toe
 
-Play the classic game of Tic Tac Toe, implemented as a console application using C# and .NET Core. Game engine and unit tests included.
+Welcome to the ultimate Tic Tac Toe experience! Play the timeless game right in your console with our feature-rich C# application powered by .NET 7.
 
 ## Getting Started
 
-Download the solution and open it with Visual Studio. Set the *ConsoleApp* as the startup project and debug it.
-
-Alternatively:
-1. Open a terminal.
-2. Navigate to the *ConsoleApp* project.
-3. Run the game with `dotnet run Program.cs`.
-
 ### Prerequisites
 
-- **.NET Core 2.1**
-- **XUnit** (if running tests)
-- Visual Studio (optional but recommended)
+- **.NET 7** installed on your system.
+
+## How to Play
+
+1. **Command Line Hero:** Want to jump straight into the action? Fire up your terminal and follow the steps below.
+
+## Running the Game
+
+### Command Line Hero
+
+1. Open your terminal of choice.
+2. Navigate to the *ConsoleApp* project directory.
+3. Enter `dotnet run Program.cs` and let the games begin!
+
+#### Unix-based Systems (macOS, Linux)
+- Simply run `./run.sh` in your terminal.
+
+#### Windows
+- Run `run.bat` for instant gaming pleasure.
 
 ## Built With
 
-* [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
-* [.NET Core](https://dotnet.microsoft.com/download/dotnet-core/2.1)
-* [XUnit](https://xunit.net/)
+* [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - The language of choice.
+* [.NET 7](https://dotnet.microsoft.com/download/dotnet/7.0) - Powering the magic behind the scenes.
+* [XUnit](https://xunit.net/) - Ensuring quality with every move.
+
+## Get Ready to Play!
+
+What are you waiting for? Grab your X's and O's and embark on an epic journey of strategic gameplay! Have fun and may the best player win!
 
 ## License
 
