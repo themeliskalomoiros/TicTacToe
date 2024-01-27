@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------------------------------
 
-using GameEngine;
-using GameEngine.Events;
 using System;
 using System.Threading;
+using GameEngine;
+using GameEngine.Events;
 
 //-----------------------------------------------------------------------------
 
@@ -21,10 +21,10 @@ public class Program {
 
 public static void Main(string[] args)
 {
-  UserOutput.PrintWelcome();
-  UserOutput.PrintInstructions();
+  GameOutput.PrintWelcome();
+  GameOutput.PrintInstructions();
   BoardDrawer.DrawBoardWithPositions();
-  UserOutput.PrintWhoPlaysFirst();
+  GameOutput.PrintWhoPlaysFirst();
   
   var game = UserInput.ReadGame();
   AttachListenersTo(game);
@@ -33,11 +33,11 @@ public static void Main(string[] args)
   {
     if (game.IsCrossesTurn)
     {
-      UserOutput.PrintCrossesMakeMove();
+      GameOutput.PrintCrossesMakeMove();
     }
     else
     {
-      UserOutput.PrintCirclesMakeMove();
+      GameOutput.PrintCirclesMakeMove();
     }
 
     int move;
@@ -47,7 +47,7 @@ public static void Main(string[] args)
     }
     else
     {
-      UserOutput.PrintNotValidMove();
+      GameOutput.PrintNotValidMove();
     }
   }
 }
@@ -74,7 +74,7 @@ private static void Game_CompletionEvent(
   object s, 
   CompletionEventArgs e)
 {
-  UserOutput.Print(e.Result);
+  GameOutput.Print(e.Result);
   Thread.Sleep(3000);
   Environment.Exit(0);
 }
@@ -110,8 +110,8 @@ private static void Game_MarkOccupiedEvent(
 
 private static void Game_MarkFailedEvent(object sender, EventArgs e)
 {
-  UserOutput.PrintNotValidMove();
-  UserOutput.PrintValidMoveRange();
+  GameOutput.PrintNotValidMove();
+  GameOutput.PrintValidMoveRange();
 }
 
 //-----------------------------------------------------------------------------
