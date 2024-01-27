@@ -26,7 +26,7 @@ public static void Main(string[] args)
   GameOutput.DrawBoardWithPositions();
   GameOutput.PrintWhoPlaysFirst();
   
-  var game = UserInput.ReadGame();
+  var game = GameInput.ReadGame();
   AttachListenersTo(game);
 
   while (true)
@@ -41,7 +41,7 @@ public static void Main(string[] args)
     }
 
     int move;
-    if (UserInput.ReadMove(out move))
+    if (GameInput.ReadMove(out move))
     {
       game.Mark(move);
     }
