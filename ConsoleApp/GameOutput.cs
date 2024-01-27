@@ -19,7 +19,7 @@ public static class GameOutput {
 
 //-----------------------------------------------------------------------------
 
-public static void Print(Result result)
+public static void PrintResult(Result result)
 {
   Console.WriteLine("Game Over!");
   
@@ -52,7 +52,7 @@ public static void PrintInstructions()
 
 //-----------------------------------------------------------------------------
 
-public static void PrintNotValidMove()
+public static void PrintInvalidMove()
 {
   Console.WriteLine("Oops! That move isn't valid.");
 }
@@ -100,9 +100,46 @@ public static void PrintWelcome()
 
 //-----------------------------------------------------------------------------
 
-public static void PrintValidMoveRange()
+public static void PrintValidMoves()
 {
   Console.Write("Allowed positions: 1, 2, 3, 4, 5, 6, 7, 8, 9");
+}
+
+//-----------------------------------------------------------------------------
+
+public static void DrawBoardWithPositions()
+{
+  Console.WriteLine("\tBoarder Positions");
+  Console.WriteLine($"\t1 | 2 | 3\n\t{LineInBetween}\n\t4 | 5 | 6\n\t{LineInBetween}\n\t7 | 8 | 9");
+  Console.WriteLine();
+}
+
+//-----------------------------------------------------------------------------
+
+public static void DrawBoardOf(
+  GameState game)
+{
+  var sb = new StringBuilder();
+  for (int i = 0; i < 9; i++)
+  {
+    if (i % 3 == 0)
+    {
+      var m0 = game.GetMark(i);
+      var m1 = game.GetMark(i+1);
+      var m2 = game.GetMark(i+2);
+
+      sb.Append('\n');
+      sb.Append("\t" + GetBoardLine(m0, m1, m2));
+      sb.Append('\n');
+    }
+
+    if (i == 2 || i == 5)
+    {
+      sb.Append("\t" + LineInBetween);
+    }
+  }
+
+  Console.WriteLine(sb.ToString());
 }
 
 //-----------------------------------------------------------------------------
@@ -154,13 +191,41 @@ private static string GetWelcomeLineWithText()
 
 //-----------------------------------------------------------------------------
 
+private static string GetBoardLine(
+  Marking m0, 
+  Marking m1,
+  Marking m2)
+{
+  return $"{GetSymbolOf(m0)} | {GetSymbolOf(m1)} | {GetSymbolOf(m2)}";
+}
+
+//-----------------------------------------------------------------------------
+
+private static string GetSymbolOf(Marking m)
+{
+  switch(m)
+  {
+    case Marking.Circle:
+      return "O";
+    
+    case Marking.Cross:
+      return "X";
+    
+    default:
+      return " ";
+  }
+}
+
+//-----------------------------------------------------------------------------
+
 #endregion
 #region Fields
 
 //-----------------------------------------------------------------------------
 
-private const int LineWidth = 70;
 private const int LineHeight = 3;
+private const int LineWidth = 70;
+private const string LineInBetween = "---------";
 
 //-----------------------------------------------------------------------------
 

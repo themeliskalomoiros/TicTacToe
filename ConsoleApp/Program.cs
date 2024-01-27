@@ -23,7 +23,7 @@ public static void Main(string[] args)
 {
   GameOutput.PrintWelcome();
   GameOutput.PrintInstructions();
-  BoardDrawer.DrawBoardWithPositions();
+  GameOutput.DrawBoardWithPositions();
   GameOutput.PrintWhoPlaysFirst();
   
   var game = UserInput.ReadGame();
@@ -47,7 +47,7 @@ public static void Main(string[] args)
     }
     else
     {
-      GameOutput.PrintNotValidMove();
+      GameOutput.PrintInvalidMove();
     }
   }
 }
@@ -74,7 +74,7 @@ private static void Game_CompletionEvent(
   object s, 
   CompletionEventArgs e)
 {
-  GameOutput.Print(e.Result);
+  GameOutput.PrintResult(e.Result);
   Thread.Sleep(3000);
   Environment.Exit(0);
 }
@@ -85,7 +85,7 @@ private static void Game_CirclesMarkEvent(
   object s, 
   CirclesMarkEventArgs e)
 {
-  BoardDrawer.DrawBoardOf(s as GameState);
+  GameOutput.DrawBoardOf(s as GameState);
 }
 
 //-----------------------------------------------------------------------------
@@ -94,7 +94,7 @@ private static void Game_CrossesMarkEvent(
   object s, 
   CrossesMarkEventArgs e)
 {
-  BoardDrawer.DrawBoardOf(s as GameState);
+  GameOutput.DrawBoardOf(s as GameState);
 }
 
 //-----------------------------------------------------------------------------
@@ -110,8 +110,8 @@ private static void Game_MarkOccupiedEvent(
 
 private static void Game_MarkFailedEvent(object sender, EventArgs e)
 {
-  GameOutput.PrintNotValidMove();
-  GameOutput.PrintValidMoveRange();
+  GameOutput.PrintInvalidMove();
+  GameOutput.PrintValidMoves();
 }
 
 //-----------------------------------------------------------------------------
